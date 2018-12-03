@@ -32,28 +32,54 @@ public class AquariumActivity extends AppCompatActivity implements AquariumContr
         TextView waterLevel = findViewById(R.id.waterLevelText);
         TextView overflowLevel = findViewById(R.id.overflowLevelText);
 
-        temperature.setText("Temperature: " + aquarium.getTemperature());
-        waterLevel.setText("Water Level: " + aquarium.getWaterLevel());
-        overflowLevel.setText("Overflow Level: " + aquarium.getOverflowLevel());
+        //get notification textviews
+        TextView errOverflow = findViewById(R.id.ovrflowerrText);
+        TextView errWaterlvl = findViewById(R.id.waterlvlerrText);
+        TextView errTemp = findViewById(R.id.temperrText);
+        TextView allGood = findViewById(R.id.allGoodText);
+
+
+        //clear color
+        overflowLevel.setTextColor(Color.WHITE);
+        waterLevel.setTextColor(Color.WHITE);
+        temperature.setTextColor(Color.WHITE);
+
+        //clear notifications
+        errOverflow.setText("");
+        errWaterlvl.setText("");
+        errTemp.setText("");
+        allGood.setText("");
+
+
+        temperature.setText("Temperature: " + aquarium.getTemperature() + "°C");
+        waterLevel.setText("Water Level: " + aquarium.getWaterLevel() + "cm");
+        overflowLevel.setText("Overflow Level: " + aquarium.getOverflowLevel() + "cm");
+
 
         String ovrflowValue = aquarium.getOverflowLevel();
-        int ovrflowresult = Integer.parseInt(ovrflowValue);
+        double ovrflowresult = Double.parseDouble(ovrflowValue);
         if(ovrflowresult >= 2){
             overflowLevel.setTextColor(Color.RED);
+            errOverflow.setText("- Check filter for blockage. Water prone to overflowing");
         }
 
 
         String waterlvlValue = aquarium.getWaterLevel();
-        int waterlvlResult = Integer.parseInt(waterlvlValue);
+        double waterlvlResult = Double.parseDouble(waterlvlValue);
         if(waterlvlResult <= 2){
             waterLevel.setTextColor(Color.RED);
-
+            errWaterlvl.setText("- Water Level is dropping, please refill the aquarium soon");
         }
 
         String tempValue = aquarium.getTemperature();
-        int tempResult = Integer.parseInt(tempValue);
-        if(tempResult > 28 || tempResult < 23){
+        double tempResult = Double.parseDouble(tempValue);
+        if(tempResult > 30 || tempResult < 20){
             temperature.setTextColor(Color.RED);
+            errTemp.setText("- Optimal temperature is between 24 - 28 degrees celsius");
+        }
+
+        if(ovrflowresult < 2 && waterlvlResult > 2 && tempResult < 30 && tempResult > 20){
+            allGood.setText("Your aquarium is healthy and well :) YOU ROCK!!");
         }
     }
 }
