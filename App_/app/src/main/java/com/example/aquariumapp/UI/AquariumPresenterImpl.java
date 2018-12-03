@@ -38,13 +38,14 @@ public class AquariumPresenterImpl implements AquariumContract.Presenter {
 
         @Override
         public void onSuccess(List<Aquarium> aquarium) {
+
             view.update(aquarium.get(0));
         }
 
         @Override
         public void onError(Throwable e) {
-            Log.d("", "onError: FUCKKKKKKKKKKK");
-            Log.e("LOOOOOL", e.getMessage());
+            Log.d("", "onError: An error occured when connecting to host webpage");
+            Log.e("ERR: ", e.getMessage());
         }
     });
 //}

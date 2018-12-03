@@ -14,7 +14,7 @@ public class NetworkManager {
 
     //Network Manager is dealing with setting up API service
     private AquariumAPIService service = new Retrofit.Builder()
-            .baseUrl("https://secure-mountain-10770.herokuapp.com/")
+            .baseUrl("https://immense-waters-37972.herokuapp.com/")
             .addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .client(new OkHttpClient()) //http protocol stuff
